@@ -42,7 +42,7 @@ struct item {
 /* macros */
 #define SCREEN_SIZE 80
 
-void cfree(char *);  /* free if not null */
+void mglfree(char *);  /* free if not null */
 
 /* code */
 
@@ -211,9 +211,9 @@ int process_items()
           ptr->act_str ? ptr->act_str : "",
           ptr->attribute);
 
-    cfree(ptr->desc);
-    cfree(ptr->cmd);
-    cfree(ptr->act_str);
+    mglfree(ptr->desc);
+    mglfree(ptr->cmd);
+    mglfree(ptr->act_str);
     optr = ptr;
     ptr = ptr->next;
     free(optr);
@@ -287,7 +287,7 @@ int check_name(char *name)
   return 1;
 }
 
-void cfree(char *p)
+void mglfree(char *p)
 {
   if(p)
     free(p);

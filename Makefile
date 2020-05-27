@@ -3,6 +3,8 @@
 CC = gcc
 LEX = flex
 YACC = bison
+MATH = -lm
+CURSES = -lcurses
 
 PROGRAMS1 = ch1-01.pgm ch1-02.pgm ch1-03.pgm ch1-04.pgm ch1-05.pgm ch1-06.pgm
 PROGRAMS2 = ch2-01.pgm ch2-02.pgm ch2-03.pgm ch2-04.pgm ch2-05.pgm ch2-06.pgm \
@@ -104,14 +106,14 @@ ch3-04.pgm: ch3-04.l ch3-04.y ch3hdr.h
 ch3-05.pgm: ch3-05.l ch3-05.y ch3hdr2.h
 	${YACC} -d ch3-05.y
 	${LEX} -o ch3-05.c ch3-05.l
-	${CC} -o $@ ch3-05.tab.c ch3-05.c
+	${CC} -o $@ ch3-05.tab.c ch3-05.c ${MATH}
 	@echo "---- end $@ ----"
 
 # chapter 4
 
 screen: mgl mmain.c mgl-in
 	./mgl mgl-in
-	${CC} -o $@ screen.out.c mmain.c -lcurses
+	${CC} -o $@ screen.out.c mmain.c ${CURSES}
 	@echo "---- end $@ ----"
 
 mgl: mglyac.y mgllex.l subr.c mgl-code mglhdr.h
