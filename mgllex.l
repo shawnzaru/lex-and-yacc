@@ -1,7 +1,6 @@
 %{
 #include "mglyac.tab.h"
 #include "mglhdr.h"
-#include <string.h>
 
 extern int lineno;
 %}

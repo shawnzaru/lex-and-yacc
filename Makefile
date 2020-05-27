@@ -117,22 +117,6 @@ mgl: mglyac.y mgllex.l subr.c mgl-code mglhdr.h
 	${CC} -o $@ mglyac.tab.c mgllex.c subr.c
 	@echo "---- end $@ ----"
 
-#mgl:	subr.o mglyac.o mgllex.o
-#	${CC} -o $@ subr.o mglyac.o mgllex.o ${LIBS}
-#
-#subr.o:	subr.c mglyac.h mgl-code
-#
-#mgllex.o: mgllex.c mglyac.h
-#
-#mgllex.c:	mgllex.l
-#	${LEX} mgllex.l
-#	mv lex.yy.c mgllex.c
-#
-#mglyac.c mglyac.h:	mglyac.y
-#	${YACC} -d mglyac.y
-#	mv y.tab.c mglyac.c
-#	mv y.tab.h mglyac.h
-#	
 ## chapter 5
 #
 #sql1:	sql1.o scn1.o

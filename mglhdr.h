@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <math.h>
 
 int warning(char *s, char *t);
 int start_screen(char *name);

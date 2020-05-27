@@ -7,7 +7,7 @@
 
 extern int yylex();
 int yyerror(char *s);
- 
+
 int screen_done = 1; /* 1 if done, 0 otherwise */
 char *act_str;       /* extra argument for an action */
 char *cmd_str;       /* extra argument for command */
@@ -41,27 +41,23 @@ screen:   screen_name screen_contents screen_terminator
 screen_name: YSCREEN id 
   { start_screen($2);
     $$ = YSCREEN;
-    printf("$YSCREEN$ %d\n", $$);
   }
            | YSCREEN
   { start_screen(strdup("default")); 
     $$ = YSCREEN;
-    printf("$YSCREEN$ %d\n", $$);
   }
            ;
-  
+
 screen_terminator: END id
   { end_screen($2); 
     $$ = END;
-    printf("$END$ %d\n", $$);
   }
                  | END
   { end_screen(strdup("default"));
     $$ = END;
-    printf("$END$ %d\n", $$);
   }
                  ;
-      
+
 screen_contents: titles lines
                ;
 
@@ -72,10 +68,9 @@ titles: /* empty */
 title: TITLE qstring
   { add_title($2); 
     $$ = TITLE;
-    printf("$TITLE$ %d\n", $$);
   }
   ;
-     
+
 
 lines: line
      | lines line
@@ -85,10 +80,9 @@ line: ITEM qstring command ACTION action attribute
    { item_str = $2;
      add_line($5, $6);
      $$ = ITEM;
-     printf("$ITEM$ %d\n", $$);
    }
    ;
-  
+
 command: /* empty */ { cmd_str = strdup(""); }
        | COMMAND id  { cmd_str = $2; }
        ;
@@ -96,7 +90,6 @@ command: /* empty */ { cmd_str = strdup(""); }
 action: EXECUTE qstring
    { act_str = $2;
      $$ = EXECUTE;
-     printf("$EXECUTE$ %d\n", $$);
    }
       | MENU id
    { /* make "menu_" $2 */
@@ -105,32 +98,28 @@ action: EXECUTE qstring
      strcat(act_str, $2);
      free($2);
      $$ = MENU;
-     printf("$MENU$ %d\n", $$);
    }
-      | QUIT   { $$ = QUIT; printf("$QUIT$ %d\n", $$); }
-      | IGNORE { $$ = IGNORE; printf("$IGNORE$ %d\n", $$); }
+      | QUIT   { $$ = QUIT; }
+      | IGNORE { $$ = IGNORE; }
       ;
-  
-attribute: /* empty */     { $$ = VISIBLE; printf("$VISIBLE$ %d\n", $$); }
-   | ATTRIBUTE VISIBLE { $$ = VISIBLE; printf("$VISIBLE$ %d\n", $$); }
-   | ATTRIBUTE INVISIBLE { $$ = INVISIBLE; printf("$INVISIBLE$ %d\n", $$); }
+
+attribute: /* empty */     { $$ = VISIBLE; }
+   | ATTRIBUTE VISIBLE { $$ = VISIBLE; }
+   | ATTRIBUTE INVISIBLE { $$ = INVISIBLE; }
    ;
-  
+
 id: ID
-     { $$ = $1; printf("$ID$ %s\n", $$);}
+     { $$ = $1; }
   | QSTRING
      { warning("String literal inappropriate", (char *)0);
        $$ = $1;  /* but use it anyway */
-       printf("$QSTRING$ %s\n", $$);
      }
   ;
 
-qstring: QSTRING { $$ = $1; printf("$QSTRING$ %s\n", $$); }
+qstring: QSTRING { $$ = $1; }
        | ID 
-    { warning("Non-string literal inappropriate",
-        (char *)0);
+    { warning("Non-string literal inappropriate", (char *)0);
       $$ = $1;  /* but use it anyway */
-      printf("$ID$ %s\n", $$);
     }
   ;
 %%
@@ -147,9 +136,9 @@ int main(int argc, char **argv)
   char *outfile;
   char *infile;
   extern FILE *yyin, *yyout;
-    
+
   progname = argv[0];
-    
+
   if(argc > 3)
   {
     fprintf(stderr, usage, progname);
@@ -175,21 +164,21 @@ int main(int argc, char **argv)
   {
     outfile = DEFAULT_OUTFILE;
   }
-    
+
   yyout = fopen(outfile,"w");
   if(yyout == NULL) /* open failed */
   {
     fprintf(stderr,"%s: cannot open %s\n", progname, outfile);
     exit(1);
   }
-    
+
   /* normal interaction on yyin and 
      yyout from now on */
-    
+
   yyparse();
-    
+
   end_file(); /* write out any final information */
-    
+
   /* now check EOF condition */
   if(!screen_done) /* in the middle of a screen */
   {
@@ -206,11 +195,11 @@ int warning(char *s, char *t) /* print warning message */
   if (t)
     fprintf(stderr, " %s", t);
   fprintf(stderr, " line %d\n", lineno);
-  return 1;
+  return 0;
 }
 
 int yyerror(char *s)
 {
   fprintf(stderr, "error: %s\n", s);
-  return 1;
+  return 0;
 }

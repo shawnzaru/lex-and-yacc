@@ -3,7 +3,7 @@ extern void menu_cleanup();
 
 int main()
 {
-	menu_second();
-	menu_cleanup();
+  menu_second();
+  menu_cleanup();
   return 0;
 }
