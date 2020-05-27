@@ -1,5 +1,5 @@
 %{
-#include "sql2hdr.h"
+#include "sql1hdr.h"
 %}
 
   /* symbolic tokens */
