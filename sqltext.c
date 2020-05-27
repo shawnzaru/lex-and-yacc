@@ -2,7 +2,7 @@
  *  Text handling routines for simple embedded SQL
  */
 
-#include "sqlhdr.h"
+#include "sql2hdr.h"
 
 char save_buf[2000];  /* buffer for SQL command */
 char *savebp;    /* current buffer pointer */

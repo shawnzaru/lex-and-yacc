@@ -1,6 +1,6 @@
 %{
 #include "sql2.tab.h"
-#include "sqlhdr.h"
+#include "sql2hdr.h"
 
 int lineno = 1;
 

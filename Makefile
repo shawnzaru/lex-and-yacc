@@ -124,13 +124,13 @@ mgl: mglyac.y mgllex.l subr.c mgl-code mglhdr.h
 
 # chapter 5
 
-sql1: sql1.y scn1.l
+sql1: sql1.y scn1.l sql1hdr.h
 	${YACC} -vd sql1.y
 	${LEX} -o scn1.c scn1.l
 	${CC} -o $@ sql1.tab.c scn1.c
 	@echo "---- end $@ ----"
 
-sql2: sql2.y scn2.l sqltext.c sqlhdr.h
+sql2: sql2.y scn2.l sqltext.c sql2hdr.h
 	${YACC} -vd sql2.y
 	${LEX} -o scn2.c scn2.l
 	${CC} -o $@ sql2.tab.c scn2.c sqltext.c

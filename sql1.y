@@ -1,6 +1,5 @@
 %{
-extern int yylex();
-extern int yyerror(char *s);
+#include "sql2hdr.h"
 %}
 
   /* symbolic tokens */

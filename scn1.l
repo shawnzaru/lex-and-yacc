@@ -5,11 +5,9 @@
  */
 
 #include "sql1.tab.h"
-#include <string.h>
+#include "sql1hdr.h"
 
 int lineno = 1;
-int yyerror(char *s);
-extern int yyparse();
 %}
   /* MKS needs the next line to increase the NFA table */
 %e 1200

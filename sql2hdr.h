@@ -7,7 +7,6 @@
 extern FILE *yyin;
 extern FILE *yyout;
 
-
 extern int yyerror(char *s);
 extern void un_sql();
 extern int yyparse();
