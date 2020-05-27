@@ -80,31 +80,31 @@ ch1-06.tab.h ch1-06.tab.c: ch1-06.y ch1-06.h
 ch3-01.pgm: ch3-01.l ch3-01.y
 	${YACC} -d ch3-01.y
 	${LEX} -o ch3-01.c ch3-01.l
-	${CC} -o ch3-01.pgm ch3-01.tab.c ch3-01.c
+	${CC} -o $@ ch3-01.tab.c ch3-01.c
 	@echo "---- end $@ ----"
 
 ch3-02.pgm: ch3-02.l ch3-02.y
 	${YACC} -d ch3-02.y
 	${LEX} -o ch3-02.c ch3-02.l
-	${CC} -o ch3-02.pgm ch3-02.tab.c ch3-02.c
+	${CC} -o $@ ch3-02.tab.c ch3-02.c
 	@echo "---- end $@ ----"
 
 ch3-03.pgm: ch3-03.l ch3-03.y
 	${YACC} -d ch3-03.y
 	${LEX} -o ch3-03.c ch3-03.l
-	${CC} -o ch3-03.pgm ch3-03.tab.c ch3-03.c
+	${CC} -o $@ ch3-03.tab.c ch3-03.c
 	@echo "---- end $@ ----"
 
 ch3-04.pgm: ch3-04.l ch3-04.y ch3hdr.h
 	${YACC} -d ch3-04.y
 	${LEX} -o ch3-04.c ch3-04.l
-	${CC} -o ch3-04.pgm ch3-04.tab.c ch3-04.c
+	${CC} -o $@ ch3-04.tab.c ch3-04.c
 	@echo "---- end $@ ----"
 
 ch3-05.pgm: ch3-05.l ch3-05.y ch3hdr2.h
 	${YACC} -d ch3-05.y
 	${LEX} -o ch3-05.c ch3-05.l
-	${CC} -o ch3-05.pgm ch3-05.tab.c ch3-05.c
+	${CC} -o $@ ch3-05.tab.c ch3-05.c
 	@echo "---- end $@ ----"
 
 # chapter 4
