@@ -44,8 +44,11 @@ CLEAN3 = ch3-01.pgm ch3-01.c ch3-01.tab.c ch3-01.tab.h \
 
 CLEAN4 =  mgl mglyac.tab.c mglyac.tab.h mgllex.c screen.out.c screen
 
+CLEAN5 =  sql1 sql1.output sql1.tab.c sql1.tab.h scn1.c \
+          sql2 sql2.output sql2.tab.c sql2.tab.h scn2.c
+
 clean:
-	rm -f ${CLEAN1} ${CLEAN2} ${CLEAN3} ${CLEAN4}
+	rm -f ${CLEAN1} ${CLEAN2} ${CLEAN3} ${CLEAN4} ${CLEAN5}
 
 # Chapter 1
 
@@ -117,31 +120,21 @@ mgl: mglyac.y mgllex.l subr.c mgl-code mglhdr.h
 	${CC} -o $@ mglyac.tab.c mgllex.c subr.c
 	@echo "---- end $@ ----"
 
-## chapter 5
-#
-#sql1:	sql1.o scn1.o
-#	${CC} -o $@ sql1.o scn1.o
-#
-#sql1.c sql1.h:	sql1.y
-#	${YACC} -vd sql1.y
-#	mv y.tab.h sql1.h
-#	mv y.tab.c sql1.c
-#	mv y.output sql1.out
-#
-#scn1.o:	sql1.h scn1.c
-#
-#sql2:	sql2.o scn2.o sqltext.o
-#	${CC} -o $@ sql2.o scn2.o sqltext.o
-#
-#sql2.c sql2.h:	sql2.y
-#	${YACC} -vd sql2.y
-#	mv y.tab.h sql2.h
-#	mv y.tab.c sql2.c
-#	mv y.output sql2.out
-#
-#scn2.o:	sql2.h scn2.c
-#
-#
+# chapter 5
+
+sql1: sql1.y scn1.l
+	${YACC} -vd sql1.y
+	${LEX} -o scn1.c scn1.l
+	${CC} -o $@ sql1.tab.c scn1.c
+	@echo "---- end $@ ----"
+
+sql2: sql2.y scn2.l sqltext.c sqlhdr.h
+	${YACC} -vd sql2.y
+	${LEX} -o scn2.c scn2.l
+	${CC} -o $@ sql2.tab.c scn2.c sqltext.c
+	@echo "---- end $@ ----"
+
+
 .SUFFIXES:	.pgm .l .y
 
 .l.pgm:
