@@ -159,7 +159,7 @@ WORK    { return WORK; }
 
 int yyerror(char *s)
 {
-  printf("%d: %s at %s\n", lineno, s, yytext);
+  fprintf(stderr, "%d: %s at %s\n", lineno, s, yytext);
   return 0;
 }
 
