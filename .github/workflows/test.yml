@@ -24,7 +24,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        sudo apt install flex bison ncurses-devel
+        sudo apt install flex bison libncurses5-dev
 
     - name: make all
       run: make
