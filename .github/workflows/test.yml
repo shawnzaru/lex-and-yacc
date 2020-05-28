@@ -21,15 +21,17 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: |
+        sudo apt install flex bison
 
-    # Runs a single command using the runners shell
     - name: make all
       run: make
     
     - name: clean
       run: make clean
 
-    # Runs a set of commands using the runners shell
     - name: make chapters
       run: |
         make ch1
